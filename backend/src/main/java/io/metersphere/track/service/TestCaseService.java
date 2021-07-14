@@ -24,8 +24,6 @@ import io.metersphere.excel.domain.ExcelResponse;
 import io.metersphere.excel.domain.TestCaseExcelData;
 import io.metersphere.excel.domain.TestCaseExcelDataFactory;
 import io.metersphere.excel.handler.FunctionCaseTemplateWriteHandler;
-import io.metersphere.excel.listener.TestCaseDataIgnoreErrorListener;
-import io.metersphere.excel.listener.TestCaseDataListener;
 import io.metersphere.excel.listener.TestCaseNoModelDataListener;
 import io.metersphere.excel.utils.EasyExcelExporter;
 import io.metersphere.excel.utils.FunctionCaseImportEnum;
@@ -1494,6 +1492,22 @@ public class TestCaseService {
             List<TestCase> definitions = testCaseMapper.selectByExample(example);
             List<String> names = definitions.stream().map(TestCase::getName).collect(Collectors.toList());
             OperatingLogDetails details = new OperatingLogDetails(JSON.toJSONString(ids), definitions.get(0).getProjectId(), String.join(",", names), definitions.get(0).getCreateUser(), new LinkedList<>());
+            return JSON.toJSONString(details);
+        }
+        return null;
+    }
+    public String getCaseLogDetails(TestCaseMinderEditRequest request) {
+        if (CollectionUtils.isNotEmpty(request.getData())) {
+            List<String> ids = request.getData().stream().map(TestCase::getId).collect(Collectors.toList());
+            TestCaseExample example = new TestCaseExample();
+            example.createCriteria().andIdIn(ids);
+            List<TestCase> cases = testCaseMapper.selectByExample(example);
+            List<String> names = cases.stream().map(TestCase::getName).collect(Collectors.toList());
+            List<DetailColumn> columnsList =new LinkedList<>();
+            DetailColumn column = new DetailColumn("名称", "name", String.join(",",names),null);
+            columnsList.add(column);
+
+            OperatingLogDetails details = new OperatingLogDetails(JSON.toJSONString(ids), request.getProjectId(), String.join(",", names), SessionUtils.getUserId(), columnsList);
             return JSON.toJSONString(details);
         }
         return null;
