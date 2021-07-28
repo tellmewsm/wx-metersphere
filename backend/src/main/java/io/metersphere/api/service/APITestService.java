@@ -68,7 +68,7 @@ public class APITestService {
     @Resource
     private TestCaseService testCaseService;
 
-    private static final String BODY_FILE_DIR = "/opt/metersphere/data/body";
+    private static final String BODY_FILE_DIR = "/Users/wuxi/Opt/metersphere/data/body";
 
     public List<APITestResult> list(QueryAPITestRequest request) {
         request.setOrders(ServiceUtils.getDefaultOrder(request.getOrders()));

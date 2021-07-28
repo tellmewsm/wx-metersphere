@@ -23,8 +23,8 @@ import java.util.List;
 import java.util.UUID;
 
 public class FileUtils {
-    public static final String BODY_FILE_DIR = "/opt/metersphere/data/body";
-    public static final String MD_IMAGE_DIR = "/opt/metersphere/data/image/markdown";
+    public static final String BODY_FILE_DIR = "/Users/wuxi/Opt/metersphere/data/body";
+    public static final String MD_IMAGE_DIR = "/Users/wuxi/Opt/metersphere/data/image/markdown";
 
     private static void create(List<String> bodyUploadIds, List<MultipartFile> bodyFiles, String path) {
         String filePath = BODY_FILE_DIR;
@@ -97,7 +97,7 @@ public class FileUtils {
     }
 
     public static String createFile(MultipartFile bodyFile) {
-        String dir = "/opt/metersphere/data/body/tmp/";
+        String dir = "/Users/wuxi/Opt/metersphere/data/body/tmp/";
         File fileDir = new File(dir);
         if (!fileDir.exists()) {
             fileDir.mkdirs();
