@@ -310,7 +310,7 @@ public class HistoricalDataUpgradeService {
         return null;
     }
 
-    private static final String BODY_FILE_DIR = "/opt/metersphere/data/body";
+    private static final String BODY_FILE_DIR = "/Users/wuxi/Opt/metersphere/data/body";
 
     //文件的拷贝
     public static void copyFile(String sourcePath, String newPath) {
